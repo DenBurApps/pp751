@@ -21,211 +21,219 @@ class HomePage extends StatelessWidget {
     return GestureDetector(
       onTap: () => FocusManager.instance.primaryFocus?.unfocus(),
       child: Scaffold(
-        body: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 20),
-          child: Column(
-            children: [
-              SizedBox(
-                height: 20 +
-                    MediaQuery.of(context).viewInsets.top +
-                    MediaQuery.of(context).viewPadding.top,
-              ),
-              Row(
-                children: [
-                  const Text('Your plants', style: AppStyles.displayLarge),
-                  const Spacer(),
-                  GestureDetector(
-                    onTap: () =>
-                        Navigator.of(context).pushNamed(AppRoutes.settings),
-                    child: SvgPicture.asset(AppIcons.settings),
-                  ),
-                ],
-              ),
-              const SizedBox(height: 20),
-              const _Calendar(),
-              const SizedBox(height: 10),
-              Row(
-                children: [
-                  Expanded(
-                    child: BlocSelector<PlantsBloc, PlantsState, String>(
-                      selector: (state) => state.search,
-                      builder: (context, search) => TextFormField(
-                        initialValue: search,
-                        style:
-                            AppStyles.bodyMedium.apply(color: AppColors.black),
-                        cursorHeight: 20,
-                        cursorWidth: 1,
-                        onChanged: context.read<PlantsBloc>().updateSearch,
-                        decoration: InputDecoration(
-                          contentPadding: const EdgeInsets.all(10),
-                          hintStyle:
-                              AppStyles.bodyMedium.apply(color: AppColors.grey),
-                          hintText: 'Search',
-                          filled: true,
-                          isDense: true,
-                          fillColor: AppColors.background,
-                          focusedBorder: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(20),
-                            borderSide: BorderSide(
-                              color: AppColors.surface.withOpacity(.5),
-                            ),
-                          ),
-                          enabledBorder: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(20),
-                            borderSide: BorderSide(
-                              color: AppColors.surface.withOpacity(.5),
-                            ),
-                          ),
-                          errorBorder: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(20),
-                            borderSide: BorderSide(
-                              color: AppColors.surface.withOpacity(.5),
-                            ),
-                          ),
-                        ),
-                      ),
+        body: SingleChildScrollView(
+          child: Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 20),
+            child: Column(
+              children: [
+                SizedBox(
+                  height: 20 +
+                      MediaQuery.of(context).viewInsets.top +
+                      MediaQuery.of(context).viewPadding.top,
+                ),
+                Row(
+                  children: [
+                    const Text('Your plants', style: AppStyles.displayLarge),
+                    const Spacer(),
+                    GestureDetector(
+                      onTap: () =>
+                          Navigator.of(context).pushNamed(AppRoutes.settings),
+                      child: SvgPicture.asset(AppIcons.settings),
                     ),
-                  ),
-                  const SizedBox(width: 10),
-                  GestureDetector(
-                    onTap: () => showModalBottomSheet(
-                      context: context,
-                      isScrollControlled: true,
-                      useSafeArea: true,
-                      backgroundColor: AppColors.background,
-                      shape: const RoundedRectangleBorder(
-                        borderRadius:
-                            BorderRadius.vertical(top: Radius.circular(20)),
-                      ),
-                      builder: (_) => const _SortSheet(),
-                    ),
-                    child: Container(
-                      decoration: BoxDecoration(
-                        shape: BoxShape.circle,
-                        border: Border.all(
-                          color: AppColors.surface.withOpacity(.5),
-                        ),
-                      ),
-                      padding: const EdgeInsets.all(5),
-                      child: SvgPicture.asset(AppIcons.filter),
-                    ),
-                  ),
-                ],
-              ),
-              const SizedBox(height: 10),
-              BlocBuilder<PlantsBloc, PlantsState>(
-                builder: (context, state) {
-                  final plants = state.plants
-                      .where((e) => e.name.contains(state.search))
-                      .toList();
-                  return plants.isEmpty
-                      ? Padding(
-                          padding: const EdgeInsets.only(top: 10),
-                          child: Container(
-                            decoration: BoxDecoration(
+                  ],
+                ),
+                const SizedBox(height: 20),
+                const _Calendar(),
+                const SizedBox(height: 10),
+                Row(
+                  children: [
+                    Expanded(
+                      child: BlocSelector<PlantsBloc, PlantsState, String>(
+                        selector: (state) => state.search,
+                        builder: (context, search) => TextFormField(
+                          initialValue: search,
+                          style: AppStyles.bodyMedium
+                              .apply(color: AppColors.black),
+                          cursorHeight: 20,
+                          cursorWidth: 1,
+                          onChanged: context.read<PlantsBloc>().updateSearch,
+                          decoration: InputDecoration(
+                            contentPadding: const EdgeInsets.all(10),
+                            hintStyle: AppStyles.bodyMedium
+                                .apply(color: AppColors.grey),
+                            hintText: 'Search',
+                            filled: true,
+                            isDense: true,
+                            fillColor: AppColors.background,
+                            focusedBorder: OutlineInputBorder(
                               borderRadius: BorderRadius.circular(20),
-                              border: Border.all(
+                              borderSide: BorderSide(
                                 color: AppColors.surface.withOpacity(.5),
                               ),
                             ),
-                            padding: const EdgeInsets.all(10),
-                            child: Row(
-                              children: [
-                                Container(
-                                  decoration: BoxDecoration(
-                                    border: Border.all(
-                                      color: AppColors.surface.withOpacity(.5),
-                                    ),
-                                    borderRadius: BorderRadius.circular(20),
-                                  ),
-                                  child: ClipRRect(
-                                    borderRadius: BorderRadius.circular(19),
-                                    child: Image.asset(
-                                      AppImages.empty,
-                                      width: 138,
-                                    ),
-                                  ),
+                            enabledBorder: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(20),
+                              borderSide: BorderSide(
+                                color: AppColors.surface.withOpacity(.5),
+                              ),
+                            ),
+                            errorBorder: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(20),
+                              borderSide: BorderSide(
+                                color: AppColors.surface.withOpacity(.5),
+                              ),
+                            ),
+                          ),
+                        ),
+                      ),
+                    ),
+                    const SizedBox(width: 10),
+                    GestureDetector(
+                      onTap: () => showModalBottomSheet(
+                        context: context,
+                        isScrollControlled: true,
+                        useSafeArea: true,
+                        backgroundColor: AppColors.background,
+                        shape: const RoundedRectangleBorder(
+                          borderRadius:
+                              BorderRadius.vertical(top: Radius.circular(20)),
+                        ),
+                        builder: (_) => const _SortSheet(),
+                      ),
+                      child: Container(
+                        decoration: BoxDecoration(
+                          shape: BoxShape.circle,
+                          border: Border.all(
+                            color: AppColors.surface.withOpacity(.5),
+                          ),
+                        ),
+                        padding: const EdgeInsets.all(5),
+                        child: SvgPicture.asset(AppIcons.filter),
+                      ),
+                    ),
+                  ],
+                ),
+                const SizedBox(height: 10),
+                BlocBuilder<PlantsBloc, PlantsState>(
+                  builder: (context, state) {
+                    final plants = state.plants
+                        .where((e) => e.name.contains(state.search))
+                        .toList();
+                    return plants.isEmpty
+                        ? Padding(
+                            padding: const EdgeInsets.only(top: 10),
+                            child: Container(
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(20),
+                                border: Border.all(
+                                  color: AppColors.surface.withOpacity(.5),
                                 ),
-                                const SizedBox(width: 10),
-                                Expanded(
-                                  child: GestureDetector(
-                                    onTap: () => Navigator.of(context)
-                                        .pushNamed(AppRoutes.editPlant),
-                                    child: Container(
-                                      decoration: BoxDecoration(
-                                        borderRadius: BorderRadius.circular(20),
-                                        color: AppColors.primary,
+                              ),
+                              padding: const EdgeInsets.all(10),
+                              child: Row(
+                                children: [
+                                  Container(
+                                    decoration: BoxDecoration(
+                                      border: Border.all(
+                                        color:
+                                            AppColors.surface.withOpacity(.5),
                                       ),
-                                      height: 138,
-                                      padding: const EdgeInsets.all(10),
-                                      child: Center(
-                                        child: Column(
-                                          mainAxisSize: MainAxisSize.min,
-                                          children: [
-                                            Text(
-                                              "You don't have any plants added",
-                                              style:
-                                                  AppStyles.displaySmall.apply(
-                                                color: AppColors.background,
+                                      borderRadius: BorderRadius.circular(20),
+                                    ),
+                                    child: ClipRRect(
+                                      borderRadius: BorderRadius.circular(19),
+                                      child: Image.asset(
+                                        AppImages.empty,
+                                        width: 138,
+                                      ),
+                                    ),
+                                  ),
+                                  const SizedBox(width: 10),
+                                  Expanded(
+                                    child: GestureDetector(
+                                      onTap: () => Navigator.of(context)
+                                          .pushNamed(AppRoutes.editPlant),
+                                      child: Container(
+                                        decoration: BoxDecoration(
+                                          borderRadius:
+                                              BorderRadius.circular(20),
+                                          color: AppColors.primary,
+                                        ),
+                                        height: 138,
+                                        padding: const EdgeInsets.all(10),
+                                        child: Center(
+                                          child: Column(
+                                            mainAxisSize: MainAxisSize.min,
+                                            children: [
+                                              Text(
+                                                "You don't have any plants added",
+                                                style: AppStyles.displaySmall
+                                                    .apply(
+                                                  color: AppColors.background,
+                                                ),
+                                                textAlign: TextAlign.center,
                                               ),
-                                              textAlign: TextAlign.center,
-                                            ),
-                                            const SizedBox(height: 10),
-                                            Text(
-                                              'Click here to add',
-                                              style: AppStyles.bodySmall.apply(
-                                                color: AppColors.background,
+                                              const SizedBox(height: 10),
+                                              Text(
+                                                'Click here to add',
+                                                style:
+                                                    AppStyles.bodySmall.apply(
+                                                  color: AppColors.background,
+                                                ),
                                               ),
-                                            ),
-                                            const SizedBox(height: 10),
-                                            SvgPicture.asset(AppIcons.plus),
-                                          ],
+                                              const SizedBox(height: 10),
+                                              SvgPicture.asset(AppIcons.plus),
+                                            ],
+                                          ),
                                         ),
                                       ),
                                     ),
                                   ),
-                                ),
-                              ],
+                                ],
+                              ),
                             ),
-                          ),
-                        )
-                      : Column(
-                          children: [
-                            GestureDetector(
-                              onTap: () => Navigator.of(context)
-                                  .pushNamed(AppRoutes.editPlant),
-                              child: Container(
-                                decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(20),
-                                  color: AppColors.primary,
-                                ),
-                                padding: const EdgeInsets.all(5),
-                                child: Center(
-                                  child: Row(
-                                    mainAxisSize: MainAxisSize.min,
-                                    children: [
-                                      SvgPicture.asset(AppIcons.plus),
-                                      const SizedBox(width: 10),
-                                      Text(
-                                        'Add plant',
-                                        style: AppStyles.bodyMedium
-                                            .apply(color: AppColors.background),
-                                      ),
-                                    ],
+                          )
+                        : Column(
+                            children: [
+                              GestureDetector(
+                                onTap: () => Navigator.of(context)
+                                    .pushNamed(AppRoutes.editPlant),
+                                child: Container(
+                                  decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(20),
+                                    color: AppColors.primary,
+                                  ),
+                                  padding: const EdgeInsets.all(5),
+                                  child: Center(
+                                    child: Row(
+                                      mainAxisSize: MainAxisSize.min,
+                                      children: [
+                                        SvgPicture.asset(AppIcons.plus),
+                                        const SizedBox(width: 10),
+                                        Text(
+                                          'Add plant',
+                                          style: AppStyles.bodyMedium.apply(
+                                            color: AppColors.background,
+                                          ),
+                                        ),
+                                      ],
+                                    ),
                                   ),
                                 ),
                               ),
-                            ),
-                            ...List.generate(
-                              plants.length,
-                              (index) => _PlantTile(plants[index]),
-                            ),
-                          ],
-                        );
-                },
-              ),
-              SizedBox(height: 20 + MediaQuery.of(context).viewPadding.bottom),
-            ],
+                              ...List.generate(
+                                plants.length,
+                                (index) => _PlantTile(plants[index]),
+                              ),
+                            ],
+                          );
+                  },
+                ),
+                SizedBox(
+                  height: 20 + MediaQuery.of(context).viewPadding.bottom,
+                ),
+              ],
+            ),
           ),
         ),
       ),

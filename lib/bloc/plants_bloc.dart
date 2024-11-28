@@ -18,11 +18,7 @@ class PlantsBloc extends Cubit<PlantsState> {
         _ => b.date!.compareTo(a.date!),
       },
     );
-    emit(
-      state.copyWith(
-        plants: plants.map((e) => PlantState.fromIsarModel(e)).toList(),
-      ),
-    );
+    emit(state.copyWith(plants: ps));
   }
 
   Future<void> addPlant(PlantState plant) async {
