@@ -273,7 +273,7 @@ class _Photos extends StatelessWidget {
                         child: ClipRRect(
                           borderRadius: BorderRadius.circular(19),
                           child: Image.file(
-                            File(photos.first.path),
+                            File(photos[index].path),
                             fit: BoxFit.cover,
                           ),
                         ),
