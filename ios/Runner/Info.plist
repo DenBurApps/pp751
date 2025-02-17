@@ -5,7 +5,7 @@
 		<key>CFBundleDevelopmentRegion</key>
 		<string>$(DEVELOPMENT_LANGUAGE)</string>
 		<key>CFBundleDisplayName</key>
-		<string>Pp751</string>
+		<string>Bloom Buddy Stream</string>
 		<key>CFBundleExecutable</key>
 		<string>$(EXECUTABLE_NAME)</string>
 		<key>CFBundleIdentifier</key>
@@ -15,7 +15,7 @@
 		<key>NSPhotoLibraryUsageDescription</key>
 		<string>To pick photos of the plant from the gallery</string>
 		<key>CFBundleName</key>
-		<string>pp751</string>
+		<string>Bloom Buddy Stream</string>
 		<key>CFBundlePackageType</key>
 		<string>APPL</string>
 		<key>CFBundleShortVersionString</key>

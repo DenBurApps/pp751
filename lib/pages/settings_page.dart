@@ -54,7 +54,7 @@ class SettingsPage extends StatelessWidget {
               title: AppTexts.contactTitle,
               onTap: () async => await FlutterEmailSender.send(
                 Email(
-                  recipients: ['ПОЧТА'],
+                  recipients: ['halepkanarceza@icloud.com'],
                   subject: 'Subject',
                   body: 'Your feedback',
                 ),

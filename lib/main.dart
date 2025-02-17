@@ -4,6 +4,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_app_info/flutter_app_info.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_native_splash/flutter_native_splash.dart';
+import 'package:light_webview/light_webview.dart';
 import 'package:pp751/bloc/plant_state.dart';
 import 'package:pp751/bloc/plants_bloc.dart';
 import 'package:pp751/navigation/routes.dart';
@@ -26,7 +27,7 @@ Future<void> main() async {
   await RemoteConfigService.init();
   await AppSharedPreferences.init();
   await AppIsarDatabase.init();
-
+  await LightWebviewSettings.I.init();
   final isFirstRun = AppSharedPreferences.getIsFirstRun() ?? true;
   if (isFirstRun) await AppSharedPreferences.setNotFirstRun();
   await SystemChrome.setPreferredOrientations([
@@ -65,7 +66,7 @@ class _AppWidget extends StatelessWidget {
     return FutureBuilder(
       future: context.read<PlantsBloc>().getPlants(),
       builder: (context, snapshot) => MaterialApp(
-        title: '',
+        title: 'Bloom Buddy Stream',
         themeMode: ThemeMode.light,
         theme: ThemeData(
           primaryColor: AppColors.primary,
