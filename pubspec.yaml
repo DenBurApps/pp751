@@ -1,10 +1,10 @@
 name: pp751
 description: "A new Flutter project."
 publish_to: 'none'
-version: 1.0.1+1
+version: 1.0.2+1
 
 environment:
-  sdk: ^3.5.3
+  sdk: ^3.6.0
 
 dependencies:
   collection: ^1.18.0
@@ -54,10 +54,10 @@ flutter:
         - asset: assets/fonts/Outfit-Light.ttf
 flutter_native_splash:
   color: "#FFF9F1"
-  image: assets/images/icon.png
+  image: assets/images/icon.jpg
 
 flutter_launcher_icons:
   android: true
   ios: true
   remove_alpha_ios: true
-  image_path: "assets/images/icon.png"
+  image_path: "assets/images/icon.jpg"
